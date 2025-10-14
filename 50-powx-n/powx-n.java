@@ -1,7 +1,5 @@
 class Solution {
     public double myPow(double x, int n) {
-        
-        // Base condition: If n is 0, x^0 is 1
         if (n == 0) {
             return 1;
         }
