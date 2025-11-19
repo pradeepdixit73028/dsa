@@ -1,12 +1,13 @@
 class Solution {
     public int findFinalValue(int[] nums, int original) {
-        HashSet<Integer> set= new HashSet<>();
+        boolean[] memo= new boolean[1001];
         for(int x:nums){
-            set.add(x);
+            if(x<=1000) memo[x]=true;
         }
         int a=original;
-        while(set.contains(a)){
-            a *=2;
+        while(a<=1000){
+            if(memo[a]) a *=2;
+            else break;
         }
         return a;
     }
