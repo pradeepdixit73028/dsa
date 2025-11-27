@@ -6,6 +6,7 @@ class Solution {
                 char ch = board[i][j];
                 board[i][j]='.';
                 if(!issafe(board,i,j,ch)) return false;
+                board[i][j]=ch;
             }
         }
         return true;
