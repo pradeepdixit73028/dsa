@@ -2,9 +2,6 @@ class Solution {
     int count;
     public int totalNQueens(int n) {
        char[][] board = new char[n][n];
-        for (int i = 0; i < n; i++){
-            Arrays.fill(board[i], '.');
-        }
         count=0;
         generate(board, 0);
         return count; 
