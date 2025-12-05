@@ -1,18 +1,10 @@
 class Solution {
     public boolean canJump(int[] nums) {
-        int n = nums.length;
-        boolean dp[] = new boolean[n];
-        Arrays.fill(dp, false);
-        dp[n-1] = true;
-        for(int i = n-2; i>=0; i--) {
-            int maxJump = Math.min(i+nums[i], n-1);
-            for(int j = i+1; j <= maxJump; j++) {
-                if(dp[j]) {
-                    dp[i] = true;
-                    break;
-                }
-            }
+        int goal = nums.length - 1; 
+        for(int i = nums.length -2; i >= 0 ; i--){
+            if(goal <= i+nums[i])
+                goal = i;
         }
-        return dp[0];
+        return goal == 0;
     }
 }
