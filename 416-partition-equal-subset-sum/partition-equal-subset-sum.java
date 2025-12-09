@@ -9,18 +9,21 @@ class Solution {
             return false;
         }
         int target = sum/2;
-        Boolean [][]dp= new Boolean[n][target+1];
-        return solve(n-1,nums,target,dp);
-    }
-    public boolean solve(int i,int[] nums,int target,Boolean [][]dp){
-        if(target==0) return true;
-        if(i==0)  return nums[0]==target;
-        if(dp[i][target]!=null) return dp[i][target];
-        boolean notpick = solve(i-1,nums,target,dp);
-        boolean take =false;
-        if(nums[i]<=target){
-            take= solve(i-1,nums,target-nums[i],dp);
+        boolean [][]dp = new boolean[n][target+1];
+        dp[0][0]=true;
+        if(nums[0]<=target){
+            dp[0][nums[0]]=true;
         }
-        return dp[i][target]=(notpick || take);
+        for(int i=1;i<n;i++){
+            for(int j=1;j<=target;j++){
+                boolean notpick=dp[i-1][j];
+                boolean pick=false;
+                if(nums[i]<=j){
+                    pick = dp[i-1][j-nums[i]];
+                }
+                dp[i][j]=(pick || notpick);
+            }
+        }
+        return dp[n-1][target];
     }
 }
