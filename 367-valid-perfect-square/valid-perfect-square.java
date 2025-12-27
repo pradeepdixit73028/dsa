@@ -8,7 +8,7 @@ class Solution {
             }
         }));
     }
-    public boolean isPerfectSquare(int num) {
+    public boolean isPerfectSquare(int num){
         long s=1,e=num/2+1,mid=s+(e-s)/2;
         while(s<=e){
             mid=s+(e-s)/2;
