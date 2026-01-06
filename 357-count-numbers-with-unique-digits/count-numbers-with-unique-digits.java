@@ -1,7 +1,6 @@
 class Solution{
     public int countNumbersWithUniqueDigits(int n){
         int x=(int)Math.pow(10,n);
-        String a=String.valueOf(x);
         int ans=numDupDigitsAtMostN(x-1);
         return x-ans;
     }
