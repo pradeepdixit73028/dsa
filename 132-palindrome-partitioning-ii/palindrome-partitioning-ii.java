@@ -30,7 +30,7 @@ class Solution {
     }
 
     //Memoization
-    
+    /*
     Integer[] dp;
     public int minCut(String s) {
         dp = new Integer[s.length()];
@@ -54,10 +54,10 @@ class Solution {
         }
         return dp[i] = min;
     }
-    
+    */
 
     //Tabulation
-    /*public int minCut(String s) {
+    public int minCut(String s) {
         int n = s.length();
         int[] dp = new int[s.length()+1];
         dp[n] = 0;
@@ -73,5 +73,5 @@ class Solution {
             dp[i] = min;
         } 
         return dp[0]-1;
-    }*/
+    }
 }
