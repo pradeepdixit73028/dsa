@@ -1,6 +1,6 @@
 class Solution {
-    public int findCenter(int[][] edges) {
-        int n = edges.length + 1;
+    public int findCenter(int[][] edges){
+        int n=edges.length+1;
         ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
         for(int i=0;i<=n;i++){
             adjList.add(new ArrayList<Integer>());
@@ -16,7 +16,6 @@ class Solution {
             if(ans==n-1)
                 return i;
         }
-
         return -1;
     }
 }
