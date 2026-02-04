@@ -11,19 +11,12 @@ class Solution {
             adj.get(u).add(v);
 		    adj.get(v).add(u);
         }
-        BFS(adj, visited, source);
-        if(visited[destination]==true) return true;
-        return false;
-    }
-    public boolean[] BFS(ArrayList<ArrayList<Integer>> adj,boolean[] visited,int src){
-		ArrayList<Integer> ans=new ArrayList<>();
 		Queue<Integer> queue=new LinkedList<>();
-		queue.add(src);
-		visited[src]=true;
+		queue.add(source);
+		visited[source]=true;
 		
 		while(!queue.isEmpty()){
             int curr=queue.poll();
-        	ans.add(curr);
     		for(int x:adj.get(curr)){
     		    if(!visited[x]){
             		visited[x]=true;                    			
@@ -31,6 +24,6 @@ class Solution {
             	}
         	}
         }
-    	return visited;
+    	return visited[destination];
 	}
 }
