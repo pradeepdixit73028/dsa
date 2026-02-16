@@ -19,26 +19,25 @@ class Solution {
         int[][] dirs={{0,1},{0,-1},{1,0},{-1,0}};
         while (!q.isEmpty()) {
             int[] curr=q.poll();
-            int r=curr[0],c=curr[1],hLost=curr[2];
+            int r=curr[0],c=curr[1],h=curr[2];
             if(r==m-1&&c==n-1){
-                return health-hLost>=1;
+                return health-h>=1;
             }
             for(int[] d:dirs){
                 int nr=r+d[0],nc=c+d[1];
                 if(nr>=0&&nr<m&&nc>=0&&nc<n){
-                    int nextCost=hLost+grid.get(nr).get(nc);
-                    if(nextCost<minHel[nr][nc]){
-                        minHel[nr][nc]=nextCost;
+                    int nexthel=h+grid.get(nr).get(nc);
+                    if(nexthel<minHel[nr][nc]){
+                        minHel[nr][nc]=nexthel;
                         if(grid.get(nr).get(nc)==0){
-                            q.offerFirst(new int[]{nr,nc,nextCost});
+                            q.offerFirst(new int[]{nr,nc,nexthel});
                         }else{
-                            q.offerLast(new int[]{nr,nc,nextCost});
+                            q.offerLast(new int[]{nr,nc,nexthel});
                         }
                     }
                 }
             }
         }
-        
         return false;
     }
 }
