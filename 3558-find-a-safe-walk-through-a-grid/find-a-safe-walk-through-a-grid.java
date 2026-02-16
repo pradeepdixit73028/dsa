@@ -8,36 +8,37 @@ class Solution {
         }
     }
     public boolean findSafeWalk(List<List<Integer>> grid, int health) {
-        int n=grid.size();
-        int m=grid.get(0).size();
-        boolean[][][] visited=new boolean[n][m][health+1];
-        if(grid.get(0).get(0)>=health) return false;
-        return dfs(grid,0,0,visited,health);
+        int m = grid.size();
+        int n = grid.get(0).size();
+        int[][] minHel = new int[m][n];
+        for(int[] row:minHel) Arrays.fill(row,Integer.MAX_VALUE);
+        Deque<int[]> q=new LinkedList<>();
+        int hel=grid.get(0).get(0);
+        minHel[0][0]=hel;
+        q.offerFirst(new int[]{0,0,hel});
+        int[][] dirs={{0,1},{0,-1},{1,0},{-1,0}};
+        while (!q.isEmpty()) {
+            int[] curr=q.poll();
+            int r=curr[0],c=curr[1],hLost=curr[2];
+            if(r==m-1&&c==n-1){
+                return health-hLost>=1;
+            }
+            for(int[] d:dirs){
+                int nr=r+d[0],nc=c+d[1];
+                if(nr>=0&&nr<m&&nc>=0&&nc<n){
+                    int nextCost=hLost+grid.get(nr).get(nc);
+                    if(nextCost<minHel[nr][nc]){
+                        minHel[nr][nc]=nextCost;
+                        if(grid.get(nr).get(nc)==0){
+                            q.offerFirst(new int[]{nr,nc,nextCost});
+                        }else{
+                            q.offerLast(new int[]{nr,nc,nextCost});
+                        }
+                    }
+                }
+            }
+        }
         
-
-    }
-    public static boolean dfs(List<List<Integer>> grid,int i,int j,boolean[][][] visited, int health){
-        int n=grid.size();
-        int m=grid.get(0).size();
-        if(i<0||j<0||i>=n||j>=m) return false;
-            if(grid.get(i).get(j)==1){
-                health=health-1;
-            }
-            if(health<=0){
-                return false;
-            }
-            if(i==n-1&&j==m-1){
-                return true;
-            }
-            if(visited[i][j][health]){
-                return false;
-            }
-            visited[i][j][health]= true;
-            boolean down = dfs(grid,i+1,j,visited,health);
-            boolean right = dfs(grid,i,j+1,visited,health);
-            boolean up = dfs(grid,i-1,j,visited,health);
-            boolean left = dfs(grid,i,j-1,visited,health);
-            return down||right||up||left;
-
+        return false;
     }
 }
