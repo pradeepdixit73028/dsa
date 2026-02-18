@@ -1,21 +1,22 @@
 class Solution {
+    static int component;
     public int removeStones(int[][] stones) {
-         int n = stones.length;
-        int par[] = new int[20005];
-        int rank []= new int[20005];
-        int offset = 10001;
-        for(int i =0;i<20005;i++){
+        int n = stones.length;
+        component=n;
+        int par[] = new int[n];
+        int rank []= new int[n];
+        for(int i =0;i<n;i++){
             par[i] =i;
             rank[i] =0;
         }
-        for(int s[]:stones){
-            Rankunion(s[0],s[1]+offset,par,rank);
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(stones[i][0]==stones[j][0]||stones[i][1]==stones[j][1]){
+                    Rankunion(i,j,par,rank);
+                }
+            }
         }
-        Set<Integer> st = new HashSet<>();
-        for(int stone[]:stones){
-            st.add(find(stone[0],par));
-        }
-        return n - st.size();
+        return n - component;
         
         
     }
@@ -35,6 +36,7 @@ class Solution {
             par[px] = py;
             rank[py]++;
         }
+        component--;
         return true;
         
     }
