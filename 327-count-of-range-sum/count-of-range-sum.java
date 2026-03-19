@@ -25,14 +25,14 @@ class Solution {
     }
     public int countRangeSum(int[] nums, int lower, int upper) {
         int n = nums.length;
-        long[] prefixSums=new long[n+1];
+        long[] prefix=new long[n+1];
         TreeSet<Long> set=new TreeSet<>();
         set.add(0L);
         for(int i=0;i<n;i++){
-            prefixSums[i+1]=prefixSums[i]+nums[i];
-            set.add(prefixSums[i+1]);
-            set.add(prefixSums[i+1]-lower);
-            set.add(prefixSums[i+1]-upper);
+            prefix[i+1]=prefix[i]+nums[i];
+            set.add(prefix[i+1]);
+            set.add(prefix[i+1]-lower);
+            set.add(prefix[i+1]-upper);
         }
         Map<Long, Integer> map=new HashMap<>();
         int idx=0;
@@ -42,7 +42,7 @@ class Solution {
         int count=0;
         st.update(1,0,idx-1,map.get(0L));
         for(int i=1;i<=n;i++){
-            long Sum = prefixSums[i];
+            long Sum = prefix[i];
             int l=map.get(Sum-upper);
             int r=map.get(Sum-lower);
             count +=st.query(1,0,idx-1,l,r);
