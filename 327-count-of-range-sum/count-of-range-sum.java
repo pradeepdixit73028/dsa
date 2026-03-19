@@ -42,11 +42,11 @@ class Solution {
         int count=0;
         st.update(1,0,idx-1,map.get(0L));
         for(int i=1;i<=n;i++){
-            long currentSum = prefixSums[i];
-            int l=map.get(currentSum-upper);
-            int r=map.get(currentSum-lower);
+            long Sum = prefixSums[i];
+            int l=map.get(Sum-upper);
+            int r=map.get(Sum-lower);
             count +=st.query(1,0,idx-1,l,r);
-            st.update(1,0,idx-1,map.get(currentSum));
+            st.update(1,0,idx-1,map.get(Sum));
         }
 
         return count;
