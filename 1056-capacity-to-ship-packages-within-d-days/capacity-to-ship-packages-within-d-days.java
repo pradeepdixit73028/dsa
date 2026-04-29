@@ -26,11 +26,10 @@ class Solution {
         int load=0;
         int time=1;
         for(int i=0;i<n;i++){
-            if(load+arr[i]>mid){
+            load+=arr[i];
+            if(load>mid){
                 time++;
                 load=arr[i];
-            }else{
-                load+=arr[i];
             }
         }
         return time<=days;
