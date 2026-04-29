@@ -23,16 +23,16 @@ class Solution {
     }
     public boolean isPossible(int[] arr,int mid,int days){
         int n=arr.length;
-        int curr=0;
-        int needed=1;
+        int load=0;
+        int time=1;
         for(int i=0;i<n;i++){
-            if(curr+arr[i]>mid){
-                needed++;
-                curr=arr[i];
+            if(load+arr[i]>mid){
+                time++;
+                load=arr[i];
             }else{
-                curr+=arr[i];
+                load+=arr[i];
             }
         }
-        return needed<=days;
+        return time<=days;
     }
 }
