@@ -1,28 +1,31 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
         int n=nums.length;
-        Stack<Integer> st=new Stack<>();
         int i=0;
         while(i<n && nums[i]<0){
-            st.push(Math.abs(nums[i]));
             i++;
         }
+        int j=i-1;
+        for(int idx=0;idx<n;idx++){
+            nums[idx]=nums[idx]*nums[idx];
+        }
         int[] ans=new int[n];
-        int j=0;
-        while(!st.isEmpty() && i<n){
-            if(st.peek()<nums[i]){
-                int ele=st.pop();
-                ans[j++]=ele*ele;
+        int idx=0;
+        while(j>=0 && i<n){
+            if(nums[j]<nums[i]){
+                ans[idx++]=nums[j];
+                j--;
             }else{
-                ans[j++]=nums[i]*nums[i];
+                ans[idx++]=nums[i];
                 i++;
             }
         }
-        while(!st.isEmpty()){
-            int ele=st.pop();
-            ans[j++]=ele*ele;
-        }while(i<n){
-            ans[j++]=nums[i]*nums[i];
+        while(j>=0){
+            ans[idx++]=nums[j];
+            j--;
+        }
+        while(i<n){
+            ans[idx++]=nums[i];
             i++;
         }
         return ans;
