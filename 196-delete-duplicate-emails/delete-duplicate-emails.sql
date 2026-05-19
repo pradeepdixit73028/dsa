@@ -1,3 +1,9 @@
 # Write your MySQL query statement below
-delete p1 from person p1,person p2 
-where p1.email=p2.email and p1.id>p2.id;
+with cte as (
+    select id,row_number() over(partition by email order by id) as rnk
+    from Person
+)
+delete Person 
+from Person 
+join cte on Person.id=cte.id
+where cte.rnk>1;
