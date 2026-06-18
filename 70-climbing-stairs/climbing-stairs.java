@@ -3,12 +3,12 @@ class Solution {
         if (n == 0 || n == 1) {
             return 1;
         }
-        int prev = 1, curr = 1;
-        for (int i = 2; i <= n; i++) {
-            int temp = curr;
-            curr = prev + curr;
-            prev = temp;
+        int[] stair=new int[n];
+        stair[0]=1;
+        stair[1]=2;
+        for(int i=2;i<n;i++){
+            stair[i]=stair[i-1]+stair[i-2];
         }
-        return curr;
+        return stair[n-1];
     }
 }
